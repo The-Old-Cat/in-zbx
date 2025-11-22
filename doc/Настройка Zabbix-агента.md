@@ -1,7 +1,7 @@
 # Конфигурация Zabbix-agent
   
 > [!note]
-> После установки клиента Zabbix настраиваем его конфигурационный файл
+> После установки клиента Zabbix, настраиваем его конфигурационный файл
 >
 > `C:\Program Files\Zabbix Agent\zabbix_agentd.conf` - Windows
 >
