@@ -3,7 +3,9 @@
 > [!note]
 > После установки клиента Zabbix настраиваем его конфигурационный файл
 > `C:\Program Files\Zabbix Agent\zabbix_agentd.conf` - Windows
+>
 > `/etc/zabbix/zabbix_agentd.conf` - Linux
+>
 > путь может отличатся, если изменили при установке
 
 В секции `Server` прописываем IP-адреса с которых будут приходить запросы:
