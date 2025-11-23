@@ -330,7 +330,7 @@ $cluster = "<uuid>"
 >
 > ```powershell
 > & "C:\Program Files\1cv8\8.3.27.1786\bin\rac.exe" infobase summary list `
->     --cluster=c7313ba1-5875-4498-8184-4a830f12d77f `
+>     --cluster=UUID  `
 >     --cluster-user=admin --cluster-pwd=PassWord `
 >     "localhost:1545"
 > ```
@@ -355,7 +355,7 @@ $cluster = "<uuid>"
 >
 > ```powershell
 > & "C:\Program Files\1cv8\8.3.27.1786\bin\rac.exe" connection `
->     --cluster=c7313ba1-5875-4498-8184-4a830f12d77f list `
+>     --cluster=UUID  list `
 >     --cluster-user=admin --cluster-pwd=PassWord `
 >     "localhost:1545"
 > ```
@@ -382,7 +382,7 @@ $cluster = "<uuid>"
 > ### Что делает
 >
 > * Показывает RAS-узлы и UUID кластеров.
-> * Нужна только для получения реального UUID (который ты далее уже используешь).
+> * Нужна только для получения реального UUID
 >
 > ---
 >
@@ -390,7 +390,7 @@ $cluster = "<uuid>"
 >
 > ```powershell
 > & "C:\Program Files\1cv8\8.3.27.1786\bin\rac.exe" session `
->     --cluster=c7313ba1-5875-4498-8184-4a830f12d77f list `
+>     --cluster=UUID  list `
 >     --cluster-user=admin --cluster-pwd=PassWord `
 >     "localhost:1545"
 > ```
@@ -419,7 +419,7 @@ $cluster = "<uuid>"
 >
 > ```powershell
 > $result = & "C:\Program Files\1cv8\8.3.27.1786\bin\rac.exe" lock `
->     --cluster=c7313ba1-5875-4498-8184-4a830f12d77f list `
+>     --cluster=UUID  list `
 >     --cluster-user=admin --cluster-pwd=PassWord `
 >     "localhost:1545"
 > ```
@@ -461,7 +461,7 @@ $cluster = "<uuid>"
 >
 > ```powershell
 > & "C:\Program Files\1cv8\8.3.27.1786\bin\rac.exe" process `
->     --cluster=c7313ba1-5875-4498-8184-4a830f12d77f list `
+>     --cluster=UUID  list `
 >     --cluster-user=admin --cluster-pwd=PassWord `
 >     "localhost:1545"
 > ```
@@ -495,7 +495,7 @@ $cluster = "<uuid>"
 >
 > ```powershell
 > & "C:\Program Files\1cv8\8.3.27.1786\bin\rac.exe" counter `
->     --cluster=c7313ba1-5875-4498-8184-4a830f12d77f list `
+>     --cluster=UUID  list `
 >     --cluster-user=admin --cluster-pwd=PassWord `
 >     "localhost:1545"
 > ```
