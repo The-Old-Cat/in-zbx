@@ -54,7 +54,13 @@ Hostname=Host-name
 # Default:
 # Timeout=3
 # ============= Время ожидания выполнения скриптов-запросов  
+# Ограничиваем количество одновременно выполняемых проверок
+# Mandatory: no
+# Range: 1-100
+# Default:
+# StartAgents=3
 
+StartAgents=5
 Timeout=30
 ```
 
