@@ -169,5 +169,6 @@ UserParameter=1c.cluster.jobs.count,powershell.exe -NoProfile -ExecutionPolicy B
 
 > [!tip]
 > После изменения конфигурации необходимо перезапустить службу Zabbix Agent:
+>
 > - Windows: `Restart-Service "Zabbix Agent"`
 > - Linux: `systemctl restart zabbix-agent`
