@@ -20,6 +20,7 @@
   - [1c_config.psd1](scripts/config/)
 
 ```powershell
+#1c_config.psd1
       # Конфигурация подключения к 1С кластеру
 @{
     RacPath     = "Путь\к\rac.exe"
