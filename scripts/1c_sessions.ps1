@@ -1,31 +1,97 @@
-param($Metric = $args[0])
+param ($Metric = $args[0])
+
+# Путь к конфигу
+$configPath = "C:\Program Files\Zabbix Agent\script\config\1c_config.psd1"
+
+# Проверка существования файла конфигурации
+if (-not (Test-Path $configPath)) {
+    Write-Output 0
+    exit
+}
+
+# Загружаем конфигурацию
+$CONFIG_1C = Import-PowerShellDataFile -Path $configPath
+
+# Подготовка переменных
+$Rac     = $CONFIG_1C.RacPath
+$cluster = $CONFIG_1C.ClusterId
+$user    = $CONFIG_1C.ClusterUser
+$pwd     = $CONFIG_1C.ClusterPwd
+$server  = $CONFIG_1C.Server
+
+# Проверка существования rac.exe
+if (-not (Test-Path $Rac)) {
+    Write-Output 0
+    exit
+}
 
 try {
-    $RacPath = "C:\Program Files\1cv8\8.3.27.1786\bin\rac.exe"
-    
-    if ($Metric -eq "count") {
-        $result = & $RacPath session list --cluster=c7313ba1-5875-4498-8184-4a830f12d77f --cluster-user=new_1cPin --cluster-pwd=!Admin1c!159753 localhost:1545 2>$null
-        
-        # Безопасная проверка на null
-        if ($LASTEXITCODE -eq 0 -and $result -ne $null) {
-            $count = 0
+    switch ($Metric) {
+
+        # -------------------------------------------------------
+        # Количество сессий
+        # -------------------------------------------------------
+        "count" {
+
+            $result = & $Rac session list `
+                --cluster=$cluster `
+                --cluster-user=$user `
+                --cluster-pwd=$pwd `
+                $server 2>$null
+
+            if ($LASTEXITCODE -ne 0 -or !$result) {
+                Write-Output 0
+                break
+            }
+
+            $count = ($result | Select-String "^\s*session\s*:").Count
+            Write-Output $count
+        }
+
+        # -------------------------------------------------------
+        # LLD по сессиям
+        # -------------------------------------------------------
+        "discovery" {
+
+            $result = & $Rac session list `
+                --cluster=$cluster `
+                --cluster-user=$user `
+                --cluster-pwd=$pwd `
+                $server 2>$null
+
+            if ($LASTEXITCODE -ne 0 -or !$result) {
+                Write-Output '{"data":[]}'
+                break
+            }
+
+            $sessions = @()
+            $currentID = ""
+            $currentUser = ""
+
             foreach ($line in $result) {
-                if ($line -ne $null -and $line -match "^\s*session\s*:") {
-                    $count++
+
+                if ($line -match "^\s*session\s*:\s*(.+)$") {
+                    $currentID = $Matches[1].Trim()
+                }
+
+                if ($line -match "^\s*user-name\s*:\s*(.+)$") {
+                    $currentUser = $Matches[1].Trim()
+
+                    $sessions += @{
+                        "{#SESSIONID}"   = $currentID
+                        "{#USERNAME}"    = $currentUser
+                    }
                 }
             }
-            Write-Output $count
-        } else {
+
+            Write-Output (ConvertTo-Json @{ data = $sessions })
+        }
+
+        default {
             Write-Output 0
         }
     }
-    elseif ($Metric -eq "discovery") {
-        # Пока возвращаем пустой discovery
-        Write-Output '{"data":[]}'
-    }
-    else {
-        Write-Output 0
-    }
+
 }
 catch {
     Write-Output 0
