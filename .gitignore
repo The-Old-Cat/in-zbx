@@ -4,4 +4,4 @@
 # Исключаем кэш-файлы
 cache/
 *.log
-.vscode
+.vscode/
