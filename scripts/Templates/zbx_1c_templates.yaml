@@ -1,0 +1,33 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: b91b8f978afa45ec90535a9467a60966
+      name: '1C Servers'
+  templates:
+    - uuid: 87120fce24584ee28162f8dd91f8c718
+      template: 'Template 1C Cluster'
+      name: 'Template 1C Cluster'
+      groups:
+        - name: '1C Servers'
+      items:
+        - uuid: 1f77e2bfb0fc4db895dec68b08bbee61
+          name: '1C Количество информационных баз'
+          key: 1c.infobases.count
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 85a9977ff1ca47a6813b3b291b0b605c
+          name: '1C Количество рабочих процессов'
+          key: 1c.processes.count
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: b765d36e87ec4d1d8c5359ae4a9cf908
+          name: '1C Количество активных сессий'
+          key: 1c.sessions.count
+          tags:
+            - tag: App
+              value: 1C
+      tags:
+        - tag: App
+          value: 1C

@@ -47,46 +47,7 @@ try {
             $count = ($result | Select-String "^\s*session\s*:").Count
             Write-Output $count
         }
-
-        # -------------------------------------------------------
-        # LLD по сессиям
-        # -------------------------------------------------------
-        "discovery" {
-
-            $result = & $Rac session list `
-                --cluster=$cluster `
-                --cluster-user=$user `
-                --cluster-pwd=$pwd `
-                $server 2>$null
-
-            if ($LASTEXITCODE -ne 0 -or !$result) {
-                Write-Output '{"data":[]}'
-                break
-            }
-
-            $sessions = @()
-            $currentID = ""
-            $currentUser = ""
-
-            foreach ($line in $result) {
-
-                if ($line -match "^\s*session\s*:\s*(.+)$") {
-                    $currentID = $Matches[1].Trim()
-                }
-
-                if ($line -match "^\s*user-name\s*:\s*(.+)$") {
-                    $currentUser = $Matches[1].Trim()
-
-                    $sessions += @{
-                        "{#SESSIONID}"   = $currentID
-                        "{#USERNAME}"    = $currentUser
-                    }
-                }
-            }
-
-            Write-Output (ConvertTo-Json @{ data = $sessions })
-        }
-
+        
         default {
             Write-Output 0
         }

@@ -29,11 +29,6 @@ try {
             Write-Output $count
         }
 
-        "discovery" {
-            # Здесь можно позже добавить полноценный LLD
-            Write-Output '{"data":[]}'
-        }
-
         default {
             Write-Output 0
         }
