@@ -12,8 +12,10 @@ try {
     $server = $CONFIG_1C.Server
 
     switch ($Metric) {
-
-        "total_count" {
+        # -------------------------------------------------------
+        # Количество информационных баз
+        # -------------------------------------------------------
+        "count" {
             $result = & $Rac infobase summary list `
                 --cluster=$cluster `
                 --cluster-user=$user `

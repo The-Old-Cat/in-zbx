@@ -11,7 +11,9 @@ try {
     $server = $CONFIG_1C.Server
 
     switch ($Metric) {
-
+        # -------------------------------------------------------
+        # Количество рабочих процессов
+        # -------------------------------------------------------
         "count" {
             $result = & $Rac process list `
                 --cluster=$cluster `
@@ -26,10 +28,6 @@ try {
 
             $count = ($result | Select-String "^\s*process\s*:").Count
             Write-Output $count
-        }
-
-        "discovery" {
-            Write-Output '{"data":[]}'
         }
 
         default {
