@@ -77,9 +77,9 @@ function Get-WindowsMemory {
         $ProcessID = [int]$ProcessData["pid"]
         $process = Get-Process -Id $ProcessID -ErrorAction SilentlyContinue
         if ($process) {
-            $workingSet = [math]::Round($process.WorkingSet64 / 1MB, 2)
+            $workingSet = [math]::Round($process.WorkingSet64 , 2)
             if ($workingSet -ge 1024) {
-                $valueInGB = [math]::Round($workingSet / 1024, 2)
+                $valueInGB = [math]::Round($workingSet / 1GB , 2)
                 return $valueInGB.ToString("F", [cultureinfo]::InvariantCulture)
             } else {
                 return $workingSet.ToString("F", [cultureinfo]::InvariantCulture)
