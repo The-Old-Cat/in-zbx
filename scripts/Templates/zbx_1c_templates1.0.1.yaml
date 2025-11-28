@@ -1,0 +1,121 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: b91b8f978afa45ec90535a9467a60966
+      name: '1C Servers'
+  templates:
+    - uuid: 87120fce24584ee28162f8dd91f8c718
+      template: 'Template 1C Cluster'
+      name: 'Template 1C Cluster'
+      groups:
+        - name: '1C Servers'
+      items:
+        - uuid: 1f77e2bfb0fc4db895dec68b08bbee61
+          name: '1C Количество информационных баз'
+          key: 1c.infobases.count
+          delay: 1h
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 85a9977ff1ca47a6813b3b291b0b605c
+          name: '1C Количество рабочих процессов'
+          key: 1c.processes.count
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: b765d36e87ec4d1d8c5359ae4a9cf908
+          name: '1C Количество  активных сеансов'
+          key: 1c.sessions.count
+          tags:
+            - tag: App
+              value: 1C
+      discovery_rules:
+        - uuid: 2002cd19d38642cda58c6077d9709087
+          name: '1C Infobase Discovery'
+          key: 1c.infobases.discovery
+          delay: 1h
+          lifetime: 1h
+        - uuid: 19d5ccbacdf940d6aeedfed371171a20
+          name: '1C Processes Discovery'
+          key: 1c.processes.discovery
+          lifetime_type: DELETE_IMMEDIATELY
+          lifetime: '0'
+          item_prototypes:
+            - uuid: a654c178d48f425d8e5d2ceb0534aa31
+              name: '1C Process ID: {#PID}  on port {#PORT} "windows_memory" size'
+              key: '1c.processes.detail[{#PORT},"windows_memory"]'
+              delay: 30s
+              value_type: FLOAT
+              units: GB
+              description: 'объем физической памяти, используемой процессом rphost  системе'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 87df44bdfa034f30ab005a6b636a0730
+              name: 'Available-perfomance on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},available_perfomance]'
+              delay: 30s
+              description: 'Доступная производительность'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 07a32a4149b94806a31222ea1059c832
+              name: 'Avg call time (ms) on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},avg_call_time]'
+              delay: 30s
+              units: ms
+              description: 'Среднее время вызова (в секундах) - общее время обработки запросов'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: e6aa95e7e0494aa69dc95f7f44bd7c9b
+              name: 'Avg db call time (s) on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},avg_db_call_time]'
+              delay: 30s
+              value_type: FLOAT
+              units: s
+              description: 'Среднее время обращения к БД (в секундах).'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 7d80c8221a6b4b829046548505c61a63
+              name: 'Avg lock call time (s) on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},avg_lock_call_time]'
+              delay: 30s
+              value_type: FLOAT
+              units: s
+              description: 'Среднее время ожидания блокировок (в секундах)'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 9fbcae12570648988b155bf5cc3e1bab
+              name: 'Avg server call time (s) on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},avg_server_call_time]'
+              delay: 30s
+              value_type: FLOAT
+              units: s
+              description: 'Среднее время ожидания блокировок (в секундах)'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 5a89cb0748a64ddf83e02d0b05922582
+              name: 'Connections on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},connections]'
+              delay: 30s
+              description: 'Количество активных соединений к процессу'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: abb291d4ddfa443e84e8b997049d5307
+              name: '1C Process ID: {#PID}  on port {#PORT} memory_size'
+              key: '1c.processes.detail[{#PORT},memory_size]'
+              delay: 30s
+              value_type: FLOAT
+              units: MB
+              description: 'Размер используемой памяти в килобайтах (KB)'
+              tags:
+                - tag: App
+                  value: 1C
+      tags:
+        - tag: App
+          value: 1C
