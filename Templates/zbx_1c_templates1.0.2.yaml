@@ -125,6 +125,206 @@ zabbix_export:
               tags:
                 - tag: App
                   value: 1C
+          graph_prototypes:
+            - uuid: 65eecc7e22704eff84a03facc443b365
+              name: 'Память rphost'
+              graph_items:
+                - color: 199C0D
+                  calc_fnc: ALL
+                  item:
+                    host: 'Template 1C Cluster'
+                    key: '1c.processes.detail[{#PORT},memory_size]'
+                - sortorder: '1'
+                  color: F63100
+                  calc_fnc: ALL
+                  item:
+                    host: 'Template 1C Cluster'
+                    key: '1c.processes.detail[{#PORT},"windows_memory"]'
       tags:
         - tag: App
           value: 1C
+      dashboards:
+        - uuid: dede814dc92845039df0619f3b141a85
+          name: '1С Cluster Average (Среднее значение)'
+          pages:
+            - name: avg-call-time
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},avg_call_time]'
+                    - type: STRING
+                      name: reference
+                      value: QWSPK
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: avg-db-call-time
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},avg_db_call_time]'
+                    - type: STRING
+                      name: reference
+                      value: LJKXT
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: avg-lock-call-time
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},avg_lock_call_time]'
+                    - type: STRING
+                      name: reference
+                      value: DBMUR
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: avg-server-call-time
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},avg_server_call_time]'
+                    - type: STRING
+                      name: reference
+                      value: CFMGN
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: available-perfomance
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},available_perfomance]'
+                    - type: STRING
+                      name: reference
+                      value: CNORF
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: 95c315f88ced41209f7afd2b9f125548
+          name: '1С Cluster rphost'
+          display_period: '3600'
+          pages:
+            - name: 'rphost memory_size'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '18'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},memory_size]'
+                    - type: STRING
+                      name: reference
+                      value: GQFBI
+                    - type: INTEGER
+                      name: rf_rate
+                      value: '600'
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: 'rphost windows_memory'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '18'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},"windows_memory"]'
+                    - type: STRING
+                      name: reference
+                      value: NHEOM
+                    - type: INTEGER
+                      name: rf_rate
+                      value: '600'
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: 'rphost connections'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '18'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},connections]'
+                    - type: STRING
+                      name: reference
+                      value: JAHYH
+                    - type: INTEGER
+                      name: rf_rate
+                      value: '600'
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
