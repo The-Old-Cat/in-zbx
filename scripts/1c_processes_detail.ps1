@@ -22,8 +22,14 @@ function Get-ProcessMetric {
         "avg_db_call_time" {
             return Parse-FloatValue -Data $ProcessData -Key "avg-db-call-time"
         }
-        "capacity" {
-            return Parse-IntegerValue -Data $ProcessData -Key "capacity"
+        "avg_lock_call_time" {
+            return Parse-FloatValue -Data $ProcessData -Key "avg-lock-call-time"
+        }
+        "avg_server_call_time" {
+            return Parse-FloatValue -Data $ProcessData -Key "avg-server-call-time"
+        }
+        "available_perfomance" {
+            return Parse-IntegerValue -Data $ProcessData -Key "available-perfomance"
         }
         "windows_memory" {
             return Get-WindowsMemory -ProcessData $ProcessData
