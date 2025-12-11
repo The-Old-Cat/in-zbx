@@ -1,0 +1,920 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: b91b8f978afa45ec90535a9467a60966
+      name: '1C Servers'
+  templates:
+    - uuid: 87120fce24584ee28162f8dd91f8c718
+      template: 'Template 1C Cluster'
+      name: 'Template 1C Cluster'
+      groups:
+        - name: '1C Servers'
+      items:
+        - uuid: f236ee98e7f5449099eb4b18067a0a60
+          name: '1C  Топ вызовов по количеству:'
+          key: '1c.calls[count, count, 1]'
+          value_type: TEXT
+          trends: '0'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 453f526e42834bed936ead480d8bd7a9
+          name: '1C Топ вызовов по длительности:'
+          key: '1c.calls[count, duration, 1]'
+          value_type: TEXT
+          trends: '0'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: e79f7451992943fe909dd8db8ad67622
+          name: '1C Список Исключений'
+          key: '1c.excps[10]'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 1f77e2bfb0fc4db895dec68b08bbee61
+          name: '1C Количество информационных баз'
+          key: 1c.infobases.count
+          delay: 1h
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: ac197ff01ba64bd8a081bb61f62f8feb
+          name: '1C Список информационных баз 1С'
+          key: 1c.infobases.list
+          delay: 1h
+          value_type: TEXT
+          trends: '0'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: ef8ffaa1058744898381db65192bb5e0
+          name: '1C Top 1 Наименования  блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top.count
+          delay: '0'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[0]["{#REGION}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 9f6613f2a0ec45cd93b0ceb35417c2a4
+          name: '1C Top 1 Количество блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top1.count
+          delay: '0'
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[0]["{#COUNT}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: fc44ae5b548741b799fedf1e9d7dc5b1
+          name: '1C Top 2 Количество блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top2.count
+          delay: '0'
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[1]["{#COUNT}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 9c3e41ad7ea34b74a60e4a33ed00fd2f
+          name: '1C Top 2 Наименования  блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top2.region
+          delay: '0'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[1]["{#REGION}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: fb29939050504b079c01cf614585f23c
+          name: '1C Top 3 Количество блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top3.count
+          delay: '0'
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[2]["{#COUNT}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: da2f6a7ca69b4c8db2a4240f154b2b75
+          name: '1C Top 3 Наименования  блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top3.region
+          delay: '0'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[2]["{#REGION}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 38c0648f8dec492d8cea14c2e00bcb5d
+          name: '1C Top 4 Количество блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top4.count
+          delay: '0'
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[3]["{#COUNT}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 46d2c5711dbe45c8a4ad776b52c90127
+          name: '1C Top 4 Наименования  блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top4.region
+          delay: '0'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[3]["{#REGION}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: a915da285d634b869880f8e1337e13d1
+          name: '1C Top 5 Количество блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top5.count
+          delay: '0'
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[4]["{#COUNT}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 04fff8ce323045d5a5d99418a5b3112e
+          name: '1C Top 5 Наименования  блокировок объектов базы данных'
+          type: DEPENDENT
+          key: 1c.locks.top5.region
+          delay: '0'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data[4]["{#REGION}"]'
+          master_item:
+            key: '1c.locks[10]'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 1177ea4c5ed041a3ae34f56a66e84567
+          name: '1C Блокировки'
+          key: '1c.locks[10]'
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 85a9977ff1ca47a6813b3b291b0b605c
+          name: '1C Количество рабочих процессов'
+          key: 1c.processes.count
+          delay: 5m
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: d28a43e6967c4aa4976db5365ca923aa
+          name: '1C Количество  фоновых процессов'
+          key: 1c.sessions.bg.count
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: b765d36e87ec4d1d8c5359ae4a9cf908
+          name: '1C Количество  активных сеансов'
+          key: 1c.sessions.count
+          tags:
+            - tag: App
+              value: 1C
+        - uuid: 0d41e4ac3c804ff99adc67ed803c6a27
+          name: '1C Количество  системных фоновых процессов'
+          key: 1c.sessions.sysbg.count
+          tags:
+            - tag: App
+              value: 1C
+      discovery_rules:
+        - uuid: 2002cd19d38642cda58c6077d9709087
+          name: '1C Infobase Discovery'
+          key: 1c.infobases.discovery
+          delay: 1h
+          lifetime: 1h
+        - uuid: dce2d5d9bd51436098d795ffcce7b49d
+          name: '1C Logs Discovery'
+          key: 1c.logs.LLD
+          delay: 5m
+          item_prototypes:
+            - uuid: 2fc660f2a41346ffbc5c11191dcea7a0
+              name: '1C Calls [{#MODE}] - {#CONTEXT}'
+              key: '1c.calls[{#MODE}, count, 10]'
+              delay: 5m
+              value_type: TEXT
+              trends: '0'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: b12c64d95a174461b2ade6397841835e
+              name: '1C Exceptions [{#MODE}] - {#INDEX}'
+              key: '1c.excps[{#MODE}, 10]'
+              delay: 5m
+              value_type: TEXT
+              trends: '0'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: d118f2dacfa345a18cf2daeb4c578ca3
+              name: '1C Locks [{#MODE}] - {#REGION}'
+              key: '1c.locks[{#MODE}, 10]'
+              delay: 5m
+              value_type: TEXT
+              trends: '0'
+              tags:
+                - tag: App
+                  value: 1C
+        - uuid: 19d5ccbacdf940d6aeedfed371171a20
+          name: '1C Processes Discovery'
+          key: 1c.processes.discovery
+          lifetime_type: DELETE_IMMEDIATELY
+          lifetime: '0'
+          item_prototypes:
+            - uuid: a654c178d48f425d8e5d2ceb0534aa31
+              name: '1C Process ID: {#PID}  on port {#PORT} "windows_memory" size'
+              key: '1c.processes.detail[{#PORT},"windows_memory"]'
+              delay: 30s
+              value_type: FLOAT
+              units: GB
+              description: 'объем физической памяти, используемой процессом rphost  системе'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 87df44bdfa034f30ab005a6b636a0730
+              name: 'Available-perfomance on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},available_perfomance]'
+              delay: 30s
+              description: 'Доступная производительность'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 07a32a4149b94806a31222ea1059c832
+              name: 'Avg call time (ms) on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},avg_call_time]'
+              delay: 30s
+              units: ms
+              description: 'Среднее время вызова (в секундах) - общее время обработки запросов'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: e6aa95e7e0494aa69dc95f7f44bd7c9b
+              name: 'Avg db call time (s) on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},avg_db_call_time]'
+              delay: 30s
+              value_type: FLOAT
+              units: s
+              description: 'Среднее время обращения к БД (в секундах).'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 7d80c8221a6b4b829046548505c61a63
+              name: 'Avg lock call time (s) on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},avg_lock_call_time]'
+              delay: 30s
+              value_type: FLOAT
+              units: s
+              description: 'Среднее время ожидания блокировок (в секундах)'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 9fbcae12570648988b155bf5cc3e1bab
+              name: 'Avg server call time (s) on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},avg_server_call_time]'
+              delay: 30s
+              value_type: FLOAT
+              units: s
+              description: 'Среднее время ожидания блокировок (в секундах)'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: 5a89cb0748a64ddf83e02d0b05922582
+              name: 'Connections on port {#PORT} ,1C Process ID: {#PID}'
+              key: '1c.processes.detail[{#PORT},connections]'
+              delay: 30s
+              description: 'Количество активных соединений к процессу'
+              tags:
+                - tag: App
+                  value: 1C
+            - uuid: abb291d4ddfa443e84e8b997049d5307
+              name: '1C Process ID: {#PID}  on port {#PORT} memory_size'
+              key: '1c.processes.detail[{#PORT},memory_size]'
+              delay: 30s
+              value_type: FLOAT
+              units: MB
+              description: 'Размер используемой памяти в килобайтах (KB)'
+              tags:
+                - tag: App
+                  value: 1C
+          graph_prototypes:
+            - uuid: a2bece58d6dc4fc3a9edc91c74344b02
+              name: '1C Processes'
+              graph_items:
+                - color: 199C0D
+                  calc_fnc: ALL
+                  item:
+                    host: 'Template 1C Cluster'
+                    key: '1c.processes.detail[{#PORT},"windows_memory"]'
+                - sortorder: '1'
+                  color: F63100
+                  calc_fnc: ALL
+                  item:
+                    host: 'Template 1C Cluster'
+                    key: '1c.processes.detail[{#PORT},memory_size]'
+      tags:
+        - tag: App
+          value: 1C
+      dashboards:
+        - uuid: dede814dc92845039df0619f3b141a85
+          name: '1С Cluster Average (Среднее значение)'
+          pages:
+            - name: avg-call-time
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},avg_call_time]'
+                    - type: STRING
+                      name: reference
+                      value: QWSPK
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: avg-db-call-time
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},avg_db_call_time]'
+                    - type: STRING
+                      name: reference
+                      value: LJKXT
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: avg-lock-call-time
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},avg_lock_call_time]'
+                    - type: STRING
+                      name: reference
+                      value: DBMUR
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: avg-server-call-time
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},avg_server_call_time]'
+                    - type: STRING
+                      name: reference
+                      value: CFMGN
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: available-perfomance
+              display_period: '120'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '30'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},available_perfomance]'
+                    - type: STRING
+                      name: reference
+                      value: CNORF
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: 95c315f88ced41209f7afd2b9f125548
+          name: '1С Cluster rphost'
+          display_period: '3600'
+          pages:
+            - name: 'rphost memory_size'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '18'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},memory_size]'
+                    - type: STRING
+                      name: reference
+                      value: GQFBI
+                    - type: INTEGER
+                      name: rf_rate
+                      value: '600'
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: 'rphost windows_memory'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '18'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},"windows_memory"]'
+                    - type: STRING
+                      name: reference
+                      value: NHEOM
+                    - type: INTEGER
+                      name: rf_rate
+                      value: '600'
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: 'rphost connections'
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '18'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.processes.detail[{#PORT},connections]'
+                    - type: STRING
+                      name: reference
+                      value: JAHYH
+                    - type: INTEGER
+                      name: rf_rate
+                      value: '600'
+                    - type: INTEGER
+                      name: rows
+                      value: '6'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: 25aa1f92a70b43d7a67c6053898c3917
+          name: '1С Cluster summary'
+          display_period: '3600'
+          pages:
+            - name: summary
+              widgets:
+                - type: itemhistory
+                  width: '17'
+                  height: '11'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.infobases.list
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Список информационных баз 1С'
+                    - type: STRING
+                      name: reference
+                      value: CCTAZ
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
+                - type: itemhistory
+                  x: '17'
+                  width: '23'
+                  height: '1'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.processes.count
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Количество рабочих процессов'
+                    - type: STRING
+                      name: reference
+                      value: YQPUK
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
+                - type: itemhistory
+                  x: '17'
+                  'y': '1'
+                  width: '23'
+                  height: '1'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.sessions.count
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Количество  активных сеансов'
+                    - type: STRING
+                      name: reference
+                      value: LVZFE
+                    - type: INTEGER
+                      name: rf_rate
+                      value: '30'
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
+                - type: itemhistory
+                  x: '17'
+                  'y': '2'
+                  width: '23'
+                  height: '1'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.infobases.count
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Количество информационных баз'
+                    - type: STRING
+                      name: reference
+                      value: PYIIS
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
+                - type: itemhistory
+                  x: '17'
+                  'y': '3'
+                  width: '23'
+                  height: '1'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.sessions.sysbg.count
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Количество  системных фоновых процессов'
+                    - type: STRING
+                      name: reference
+                      value: RFBID
+                    - type: INTEGER
+                      name: rf_rate
+                      value: '30'
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
+                - type: itemhistory
+                  x: '17'
+                  'y': '4'
+                  width: '23'
+                  height: '1'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.sessions.bg.count
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Количество  фоновых процессов'
+                    - type: STRING
+                      name: reference
+                      value: RRHKT
+                    - type: INTEGER
+                      name: rf_rate
+                      value: '30'
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
+        - uuid: 5a947633da6d4c1c9cd53bb3e563d705
+          name: '1С tech-log'
+          display_period: '3600'
+          pages:
+            - widgets:
+                - type: itemhistory
+                  width: '31'
+                  height: '6'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top1.count
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Top 1 Количество блокировок объектов базы данных'
+                    - type: ITEM
+                      name: columns.1.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top.count
+                    - type: STRING
+                      name: columns.1.name
+                      value: '1C Top 1 Наименования  блокировок объектов базы данных'
+                    - type: ITEM
+                      name: columns.2.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top2.count
+                    - type: STRING
+                      name: columns.2.name
+                      value: '1C Top 2 Количество блокировок объектов базы данных'
+                    - type: ITEM
+                      name: columns.3.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top2.region
+                    - type: STRING
+                      name: columns.3.name
+                      value: '1C Top 2 Наименования  блокировок объектов базы данных'
+                    - type: ITEM
+                      name: columns.4.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top3.count
+                    - type: STRING
+                      name: columns.4.name
+                      value: '1C Top 3 Количество блокировок объектов базы данных'
+                    - type: ITEM
+                      name: columns.5.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top3.region
+                    - type: STRING
+                      name: columns.5.name
+                      value: '1C Top 3 Наименования  блокировок объектов базы данных'
+                    - type: ITEM
+                      name: columns.6.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top4.count
+                    - type: STRING
+                      name: columns.6.name
+                      value: '1C Top 4 Количество блокировок объектов базы данных'
+                    - type: ITEM
+                      name: columns.7.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top4.region
+                    - type: STRING
+                      name: columns.7.name
+                      value: '1C Top 4 Наименования  блокировок объектов базы данных'
+                    - type: ITEM
+                      name: columns.8.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top5.count
+                    - type: STRING
+                      name: columns.8.name
+                      value: '1C Top 5 Количество блокировок объектов базы данных'
+                    - type: ITEM
+                      name: columns.9.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: 1c.locks.top5.region
+                    - type: STRING
+                      name: columns.9.name
+                      value: '1C Top 5 Наименования  блокировок объектов базы данных'
+                    - type: STRING
+                      name: reference
+                      value: APEAX
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '10'
+                - type: itemhistory
+                  'y': '6'
+                  width: '72'
+                  height: '7'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.calls[count, duration, 1]'
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Топ  вызовов по длительности'
+                    - type: STRING
+                      name: reference
+                      value: TAJXD
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
+                - type: itemhistory
+                  'y': '13'
+                  width: '72'
+                  height: '8'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.calls[count, count, 1]'
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C  Топ вызов по количеству:'
+                    - type: STRING
+                      name: reference
+                      value: RDWBU
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
+                - type: itemhistory
+                  'y': '21'
+                  width: '72'
+                  height: '8'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.excps[10]'
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Список Исключений'
+                    - type: STRING
+                      name: reference
+                      value: NOIMX
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
+                - type: itemhistory
+                  x: '31'
+                  width: '41'
+                  height: '6'
+                  hide_header: 'YES'
+                  fields:
+                    - type: ITEM
+                      name: columns.0.itemid
+                      value:
+                        host: 'Template 1C Cluster'
+                        key: '1c.locks[10]'
+                    - type: STRING
+                      name: columns.0.name
+                      value: '1C Блокировки'
+                    - type: STRING
+                      name: reference
+                      value: IIKOB
+                    - type: INTEGER
+                      name: show_column_header
+                      value: '0'
+                    - type: INTEGER
+                      name: show_lines
+                      value: '1'
